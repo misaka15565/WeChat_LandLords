@@ -667,7 +667,8 @@ int main(int argc, char *argv[])
     bool LorderFirst = true;
     if (argc >= 2)
     {
-        if (argv[1] == "F")
+        
+        if (atoi(argv[1]) == 1)
         {
             LorderFirst = false;
         }

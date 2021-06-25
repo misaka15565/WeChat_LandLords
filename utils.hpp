@@ -47,17 +47,17 @@ void print_2d_vector(vector<vector<T>> vec2d)
 }
 
 unordered_map<std::string, int> s2v({
-    {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}, {"10", 10}, 
+    {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}, {"0", 10},
     {"J", 11}, {"j", 11}, {"Q", 12}, {"q", 12}, {"K", 13}, {"k", 13}, 
     {"A", 14}, {"a", 14}, {"2", 18},
-    {"Y", 20}, {"y", 20}, {"灏忕帇", 20}, 
-    {"Z", 30}, {"z", 30}, {"澶х帇", 30}
+    {"X", 20}, {"x", 20}, {"小王", 20}, 
+    {"D", 30}, {"d", 30}, {"大王", 30}
 });
 
 unordered_map<int, std::string> v2s({
-    {3, "3"}, {4, "4"}, {5, "5"}, {6, "6"}, {7, "7"}, {8, "8"}, {9, "9"}, {10, "10"}, 
+    {3, "3"}, {4, "4"}, {5, "5"}, {6, "6"}, {7, "7"}, {8, "8"}, {9, "9"}, {10, "10"},
     {11, "J"}, {12, "Q"}, {13, "K"}, {14, "A"}, {18, "2"}, 
-    {20, "灏忕帇"}, {30, "澶х帇"}
+    {20, "小王"}, {30, "大王"}
 });
 
 vector<int> get_rest_cards(vector<int>& cards, vector<int> move)
@@ -72,7 +72,7 @@ vector<int> get_rest_cards(vector<int>& cards, vector<int> move)
                 break;
             }
         }
-        if (!findit) throw "move is not subset of cards";
+        //if (!findit) throw "move is not subset of cards";
     }
     vector<int> result(cards_list.begin(), cards_list.end());
     return result;
@@ -105,9 +105,9 @@ vector<string> format_output_cards(const vector<int>& cards)
     const int size = cards.size();
     vector<string> vec_cards(size);
     for (int i=0; i<size; ++i) {
-        vec_cards[i] = v2s[cards[i]];
+        vec_cards[size-i-1] = v2s[cards[i]];
     }
-    sort(vec_cards.begin(), vec_cards.end());
+    //sort(vec_cards.begin(), vec_cards.end());
     return vec_cards;
 }
 
