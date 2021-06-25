@@ -9,75 +9,76 @@ extern pthread_mutex_t mutex;
 
 void declare()
 {
-    cout << "---------------------------\n"; 
-    cout << "ÂèØËæìÂÖ•ÁöÑÂëΩ‰ª§Ôºö" << endl; 
-    cout << "pass - Ëøá" << endl;
-    cout << "quit - ÈÄÄÂá∫Á®ãÂ∫è" << endl;
-    cout << "---------------------------\n"; 
-}
-
-void choose_engine()
-{
-    cout << "ËØ∑ÈÄâÊã©ËÆ°ÁÆóÂºïÊìéÔºöÔºàÈªòËÆ§‰ΩøÁî®Â§öÁ∫øÁ®ãÂºïÊìé)" << endl;
-    cout << "Â§öÁ∫øÁ®ãÂºïÊìé(ËæìÂÖ•M) v.s. ÂçïÁ∫øÁ®ãÂºïÊìé(ËæìÂÖ•S)" << endl;
-    cout << "ËØ∑ÈÄâÊã©ÔºàM or S): "; 
-
-    const int buf_size = 10;
-    char screen_buf[buf_size];
-    cin.getline(screen_buf, buf_size);
-    string answer = string(screen_buf);
-    if (answer[0] == 'S' || answer[0] == 's') {
-        ENGINE_TYPE = SINGLE_THREAD_ENGINE;
-    }
-    else {
-        ENGINE_TYPE = MULTI_THREAD_ENGINE;
-    }
-    string engine = (ENGINE_TYPE==MULTI_THREAD_ENGINE)?string("Â§öÁ∫øÁ®ãÂºïÊìé"):string("ÂçïÁ∫øÁ®ãÂºïÊìé") ;
-    cout << "ÂºïÊìéÁ±ªÂûã: " << engine << endl;
     cout << "---------------------------\n";
-    cin.clear();
+    cout << "ø… ‰»Îµƒ√¸¡Ó£∫" << endl;
+    cout << "p - π˝" << endl;
+    cout << "e - ÕÀ≥ˆ≥Ã–Ú" << endl;
+    cout << "---------------------------\n";
+    cout << "x–°Õı d¥ÛÕı 0¥˙±Ì10" << endl;
+    cout << "---------------------------\n";
 }
 
+const int buf_size = 1000;
+char screen_buf[buf_size];
+void AddBlankSpace()
+{
+    int i;
+    char buf[buf_size];
+    for (i = 999; i >= 0; i--)
+    {
+        buf[i] = screen_buf[i];
+        screen_buf[i] = 32;
+    }
+    for (i = 499; i >= 0; i--)
+    {
+        screen_buf[i*2]=buf[i];
+    }
+}
 int main()
 {
     declare();
-    choose_engine();
+    ENGINE_TYPE = MULTI_THREAD_ENGINE;
 
-    const int buf_size = 1000;
-    char screen_buf[buf_size];
-    pthread_mutex_init (&mutex,NULL);
+    pthread_mutex_init(&mutex, NULL);
 
     // Quick Test Case
     // string str_lorder_cards = "2 K 9 8 7 7 6 6 5 4";
-    // string str_farmer_cards = "Â§ßÁéã 2 A Q J J 9 6 4";
+    // string str_farmer_cards = "¥ÛÕı 2 A Q J J 9 6 4";
 
     // Slow Test Case
-    // string str_lorder_cards = "Â∞èÁéã Â§ßÁéã K 10 10 7 8 8 6 6";
+    // string str_lorder_cards = "–°Õı ¥ÛÕı K 10 10 7 8 8 6 6";
     // string str_farmer_cards = "2 2 A A A 9 9 7 6 6 3 3";
 
     // Standard Case
     string str_lorder_cards = "";
     string str_farmer_cards = "";
 
-    if (str_lorder_cards == "" && str_farmer_cards == "") {
-        cout << "ËØ∑ËæìÂÖ•Âú∞‰∏ªÁöÑÁâåÔºö(‰ª•Á©∫Ê†ºÈó¥Èöî)" << endl;
+    if (str_lorder_cards == "" && str_farmer_cards == "")
+    {
+        cout << "«Î ‰»Îµÿ÷˜µƒ≈∆£∫(ø…“‘“‘ø’∏Òº‰∏Ù)" << endl;
         cin.getline(screen_buf, buf_size);
+        AddBlankSpace();
         str_lorder_cards = string(screen_buf);
         bool valid_cards = validate_cards(str_lorder_cards);
-        while (!valid_cards) {
-            cout << "ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•Âú∞‰∏ªÁöÑÁâåÔºö(‰ª•Á©∫Ê†ºÈó¥Èöî)" << endl;
+        while (!valid_cards)
+        {
+            cout << " ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Îµÿ÷˜µƒ≈∆£∫(ø…“‘“‘ø’∏Òº‰∏Ù)" << endl;
             cin.getline(screen_buf, buf_size);
+            AddBlankSpace();
             str_lorder_cards = string(screen_buf);
             valid_cards = validate_cards(str_lorder_cards);
         }
 
-        cout << "ËØ∑ËæìÂÖ•ÂÜúÊ∞ëÁöÑÁâåÔºö(‰ª•Á©∫Ê†ºÈó¥Èöî)" << endl;
+        cout << "«Î ‰»Î≈©√Òµƒ≈∆£∫(ø…“‘“‘ø’∏Òº‰∏Ù)" << endl;
         cin.getline(screen_buf, buf_size);
+        AddBlankSpace();
         str_farmer_cards = string(screen_buf);
         valid_cards = validate_cards(str_farmer_cards);
-        while (!valid_cards) {
-            cout << "ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•ÂÜúÊ∞ëÁöÑÁâåÔºö(‰ª•Á©∫Ê†ºÈó¥Èöî)" << endl;
+        while (!valid_cards)
+        {
+            cout << " ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î≈©√Òµƒ≈∆£∫(ø…“‘“‘ø’∏Òº‰∏Ù)" << endl;
             cin.getline(screen_buf, buf_size);
+            AddBlankSpace();
             str_farmer_cards = string(screen_buf);
             valid_cards = validate_cards(str_farmer_cards);
         }
@@ -85,29 +86,35 @@ int main()
 
     vector<int> lorder_cards = format_input_cards(get_cards_from_input(str_lorder_cards));
     vector<int> farmer_cards = format_input_cards(get_cards_from_input(str_farmer_cards));
-    vector<int> last_move({});  
+    vector<int> last_move({});
 
-    cout << "ÂàùÂßãÁä∂ÊÄÅ: "  << endl;
-    cout << "Âú∞‰∏ªÂÆ∂ÁöÑÁâå:"; print_vector(format_output_cards(lorder_cards)); 
-    cout << "ÂÜúÊ∞ëÂÆ∂ÁöÑÁâå:"; print_vector(format_output_cards(farmer_cards));
-    cout << "ÂΩìÂâçÂá∫ÁâåËÄÖ:" << "Âú∞‰∏ª" << endl;
+    cout << "≥ı º◊¥Ã¨: " << endl;
+    cout << "µÿ÷˜º“µƒ≈∆:";
+    print_vector(format_output_cards(lorder_cards));
+    cout << "≈©√Òº“µƒ≈∆:";
+    print_vector(format_output_cards(farmer_cards));
+    cout << "µ±«∞≥ˆ≈∆’ﬂ:"
+         << "µÿ÷˜" << endl;
     cout << "---------------------------" << endl;
-    
+
     vector<int> lorder_move, farmer_move;
     int score = 0;
     pair<int, vector<int>> result = start_engine(farmer_cards, lorder_cards, last_move, LORDER);
     score = result.first;
     lorder_move = result.second;
 
-    if (score == MIN_SCORE) {
-        cout << "Âú∞‰∏ªÂøÖË¥•" << endl;
+    if (score == MIN_SCORE)
+    {
+        cout << "µÿ÷˜±ÿ∞‹" << endl;
         return 0;
     }
 
     lorder_cards = get_rest_cards(lorder_cards, lorder_move);
-    if (lorder_cards.size() == 0) {
-        cout << "Âú∞‰∏ªÂá∫Áâå: "; print_vector(format_output_cards(lorder_move));
-        cout << "Âú∞‰∏ªËÉúÂà©!" << endl;
+    if (lorder_cards.size() == 0)
+    {
+        cout << "µÿ÷˜≥ˆ≈∆: ";
+        print_vector(format_output_cards(lorder_move));
+        cout << "µÿ÷˜ §¿˚!" << endl;
         return 0;
     }
 
@@ -115,34 +122,44 @@ int main()
     vector<string> str_lorder_move, str_farmer_move;
     vector<vector<int>> proper_moves;
 
-    while (true) {
+    while (true)
+    {
         // Print the Situation after Lorder play a move
-        if (lorder_move.size() > 0) {
+        if (lorder_move.size() > 0)
+        {
             str_lorder_move = format_output_cards(lorder_move);
         }
-        else {
+        else
+        {
             str_lorder_move = {string("Pass!")};
         }
 
-        cout << "Âú∞‰∏ªÂÆ∂ÁöÑÁâå: "; print_vector(format_output_cards(lorder_cards));
-        cout << "ÂÜúÊ∞ëÂÆ∂ÁöÑÁâå: "; print_vector(format_output_cards(farmer_cards));
-        cout << "Âú∞‰∏ªÂ∑≤Âá∫Áâå: "; print_vector(str_lorder_move);
+        cout << "µÿ÷˜º“µƒ≈∆: ";
+        print_vector(format_output_cards(lorder_cards));
+        cout << "≈©√Òº“µƒ≈∆: ";
+        print_vector(format_output_cards(farmer_cards));
+        cout << "µÿ÷˜“—≥ˆ≈∆: ";
+        print_vector(str_lorder_move);
         cout << "---------------------------" << endl;
 
         // Farmer plays a move
-        cout << "ËØ∑Â∏ÆÂÜúÊ∞ëÂá∫Áâå:" << endl;
+        cout << "«Î∞Ô≈©√Ò≥ˆ≈∆:" << endl;
         cin.getline(screen_buf, buf_size);
+        AddBlankSpace();
         string input_farmer_move = string(screen_buf);
 
-        str_farmer_move = get_cards_from_input(input_farmer_move); 
-        if (str_farmer_move.size() == 0 || 
-            str_farmer_move[0] == "pass" || str_farmer_move[0] == "Pass" ) {
+        str_farmer_move = get_cards_from_input(input_farmer_move);
+        if (str_farmer_move.size() == 0 ||
+            str_farmer_move[0] == "p" || str_farmer_move[0] == "P")
+        {
             farmer_move = {};
         }
-        else if (str_farmer_move[0] == "quit") {
+        else if (str_farmer_move[0] == "e")
+        {
             exit(0);
         }
-        else {
+        else
+        {
             farmer_move = format_input_cards(str_farmer_move);
         }
 
@@ -150,38 +167,50 @@ int main()
 
         // check if farmer_move exists in proper_moves
         bool farmer_move_exists = false;
-        if (farmer_move.size() == 0) {  // pass move
+        if (farmer_move.size() == 0)
+        { // pass move
             farmer_move_exists = true;
         }
-        else {
+        else
+        {
             sort(farmer_move.begin(), farmer_move.end());
-            for (auto move : proper_moves) {
-                if (move.size() != farmer_move.size()) continue;
+            for (auto move : proper_moves)
+            {
+                if (move.size() != farmer_move.size())
+                    continue;
                 sort(move.begin(), move.end());
                 bool all_same = true;
-                for (int i=0; i<move.size(); ++i) {
-                    if (farmer_move[i] != move[i]) {
+                for (int i = 0; i < move.size(); ++i)
+                {
+                    if (farmer_move[i] != move[i])
+                    {
                         all_same = false;
                         break;
                     }
                 }
-                if (all_same == true) farmer_move_exists = true;
+                if (all_same == true)
+                    farmer_move_exists = true;
             }
         }
 
-        while (farmer_move_exists == false) {
-            cout << "Âá∫ÁâåÈîôËØØ„ÄÇËØ∑ÈáçÊñ∞Â∏ÆÂÜúÊ∞ëÂá∫Áâå:" << endl;
+        while (farmer_move_exists == false)
+        {
+            cout << "≥ˆ≈∆¥ÌŒÛ°£«Î÷ÿ–¬∞Ô≈©√Ò≥ˆ≈∆:" << endl;
             cin.getline(screen_buf, buf_size);
+            AddBlankSpace();
             input_farmer_move = string(screen_buf);
-            str_farmer_move = get_cards_from_input(input_farmer_move); 
-            if (str_farmer_move.size() == 0 || 
-                str_farmer_move[0] == "pass" || str_farmer_move[0] == "Pass") {
+            str_farmer_move = get_cards_from_input(input_farmer_move);
+            if (str_farmer_move.size() == 0 ||
+                str_farmer_move[0] == "p" || str_farmer_move[0] == "P")
+            {
                 farmer_move = {};
             }
-            else if (str_farmer_move[0] == "quit") {
+            else if (str_farmer_move[0] == "e")
+            {
                 exit(0);
             }
-            else {
+            else
+            {
                 farmer_move = format_input_cards(str_farmer_move);
             }
 
@@ -189,60 +218,77 @@ int main()
 
             // check if farmer_move exists in proper_moves
             farmer_move_exists = false;
-            if (farmer_move.size() == 0) {  // pass move
+            if (farmer_move.size() == 0)
+            { // pass move
                 farmer_move_exists = true;
             }
-            else {
+            else
+            {
                 sort(farmer_move.begin(), farmer_move.end());
-                for (auto move : proper_moves) {
-                    if (move.size() != farmer_move.size()) continue;
+                for (auto move : proper_moves)
+                {
+                    if (move.size() != farmer_move.size())
+                        continue;
                     sort(move.begin(), move.end());
                     bool all_same = true;
-                    for (int i=0; i<move.size(); ++i) {
-                        if (farmer_move[i] != move[i]) {
+                    for (int i = 0; i < move.size(); ++i)
+                    {
+                        if (farmer_move[i] != move[i])
+                        {
                             all_same = false;
                             break;
                         }
                     }
-                    if (all_same) farmer_move_exists = true;
+                    if (all_same)
+                        farmer_move_exists = true;
                 }
             }
         }
 
         farmer_cards = get_rest_cards(farmer_cards, farmer_move);
-        if (farmer_cards.size() == 0) {
-            cout << "ÂÜúÊ∞ëÂá∫Áâå: "; print_vector(format_output_cards(farmer_move));
-            cout << "ÂÜúÊ∞ëËÉúÂà©ÔºÅ" << endl;
+        if (farmer_cards.size() == 0)
+        {
+            cout << "≈©√Ò≥ˆ≈∆: ";
+            print_vector(format_output_cards(farmer_move));
+            cout << "≈©√Ò §¿˚£°" << endl;
             return 0;
         }
 
-        if (farmer_move.size() > 0) {
+        if (farmer_move.size() > 0)
+        {
             str_farmer_move = format_output_cards(farmer_move);
         }
-        else {
+        else
+        {
             str_farmer_move = {"Pass!"};
         }
-        cout << "Âú∞‰∏ªÂÆ∂ÁöÑÁâå: "; print_vector(format_output_cards(lorder_cards));
-        cout << "ÂÜúÊ∞ëÂÆ∂ÁöÑÁâå: "; print_vector(format_output_cards(farmer_cards));
-        cout << "ÂÜúÊ∞ëÂ∑≤Âá∫Áâå: "; print_vector(str_farmer_move);
+        cout << "µÿ÷˜º“µƒ≈∆: ";
+        print_vector(format_output_cards(lorder_cards));
+        cout << "≈©√Òº“µƒ≈∆: ";
+        print_vector(format_output_cards(farmer_cards));
+        cout << "≈©√Ò“—≥ˆ≈∆: ";
+        print_vector(str_farmer_move);
         cout << "---------------------------" << endl;
 
         // LandLorder plays a move
-        find_best_move = false;  // recovery this global variable
+        find_best_move = false; // recovery this global variable
         best_move = {};
         result = start_engine(farmer_cards, lorder_cards, farmer_move, LORDER);
         score = result.first;
         lorder_move = result.second;
 
-        if (score == MIN_SCORE) {
-            cout << "Âú∞‰∏ªÂøÖË¥•ÔºÅ" << endl;
+        if (score == MIN_SCORE)
+        {
+            cout << "µÿ÷˜±ÿ∞‹£°" << endl;
             return 0;
         }
 
         lorder_cards = get_rest_cards(lorder_cards, lorder_move);
-        if (lorder_cards.size() == 0) {
-            cout << "Âú∞‰∏ªÂá∫Áâå: "; print_vector(format_output_cards(lorder_move));
-            cout << "Âú∞‰∏ªËÉúÂà©ÔºÅ" << endl;
+        if (lorder_cards.size() == 0)
+        {
+            cout << "µÿ÷˜≥ˆ≈∆: ";
+            print_vector(format_output_cards(lorder_move));
+            cout << "µÿ÷˜ §¿˚£°" << endl;
             return 0;
         }
     }

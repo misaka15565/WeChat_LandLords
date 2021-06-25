@@ -16,7 +16,7 @@ int success_cases = 0;
                       cout << "Sucessful test cases: " << success_cases << endl; \
                       cout << "Failed test cases: " << failed_cases << endl; }
 
-string c = "3 3 3 3 4 4 4 5 5 6 6 7 7 8 8 9 9 10 J Q K K A A A 澶х帇 灏忕帇";
+string c = "3 3 3 3 4 4 4 5 5 6 6 7 7 8 8 9 9 10 J Q K K A A A 大王 小王";
 
 void test_s2v_v2s() 
 {
@@ -47,7 +47,7 @@ void test_validate_cards()
 void test_get_cards_from_input()
 {
     TEST_START
-    string input = "3 3 3 4 4 4 5 7 5 7 8 9 10 10 9 8 澶х帇 灏忕帇";
+    string input = "3 3 3 4 4 4 5 7 5 7 8 9 10 10 9 8 大王 小王";
     cout << input << endl;
     vector<string> cards = get_cards_from_input(input);
     for (auto c : cards) cout << c <<" "; cout << endl;
