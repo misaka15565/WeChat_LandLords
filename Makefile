@@ -1,5 +1,5 @@
 GPP := g++ -O3 -std=c++11 -static
-# GPP := g++ -std=c++11
+# GPP := g++ -std=c++11 -static
 # CC := gcc
 
 all: unit_test solve_puzzle
@@ -14,4 +14,4 @@ solve_puzzle: solve_puzzle.cpp utils.hpp.gch MoveGener.hpp MoveClassifier.hpp Mo
 	${GPP} -o solve_puzzle solve_puzzle.cpp -lpthread
 
 clean: 
-	rm -f *.o *.gch unit_test solve_puzzle
+	rm *.gch
