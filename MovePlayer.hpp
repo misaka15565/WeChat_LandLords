@@ -82,7 +82,7 @@ vector<vector<int>> get_proper_moves(vector<int>& cards, vector<int>& rival_move
         proper_moves = filter_type_14_4_2_2(all_moves, rival_move);
     }
     else {
-        throw "Invalid Move type!";
+        //throw "Invalid Move type!";
     }
 
     // Add bomb and king_bomb moves if needed
